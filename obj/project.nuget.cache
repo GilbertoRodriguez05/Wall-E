@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "vGke/3ObQEQ=",
+  "success": true,
+  "projectFilePath": "D:\\Universidad\\Pro Gilbe\\Segundo Proyecto\\Wall-E\\Wall-E.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\GILBE LAPTOP ASUS\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.16\\microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\GILBE LAPTOP ASUS\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.16\\microsoft.windowsdesktop.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\GILBE LAPTOP ASUS\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.16\\microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\GILBE LAPTOP ASUS\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.16\\microsoft.netcore.app.host.win-x64.8.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
