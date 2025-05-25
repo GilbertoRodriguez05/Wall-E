@@ -1,13 +1,13 @@
 using System.Security.Cryptography;
 
-class Scanner
+public class Scanner
 {
     public string source;
     public List<Token> tokens = new List<Token> { };
     public int Start = 0;
     public int current = 0;
     public int line = 1;
-    Scanner(string source)
+    public Scanner(string source)
     {
         this.source = source;
     }
@@ -34,12 +34,13 @@ class Scanner
             case '+': AddToken(TokenTypes.Suma, null); break;
             case '/': AddToken(TokenTypes.Division, null); break;
             case '%': AddToken(TokenTypes.Modulo, null); break;
-            case '←': AddToken(TokenTypes.Declaracion, null); break;
             case '-': AddToken(TokenTypes.Resta, null); break;
             case '*': AddToken(Match('*') ? TokenTypes.Potencia : TokenTypes.Multiplicacion, null); break;
             case '!': AddToken(Match('=') ? TokenTypes.Distinto : TokenTypes.Negacion, null); break;
             case '>': AddToken(Match('=') ? TokenTypes.MayorIgual : TokenTypes.Mayor, null); break;
-            case '<': AddToken(Match('=') ? TokenTypes.MenorIgual : TokenTypes.Menor, null); break;
+            case '<': if (Match('=')) AddToken(TokenTypes.MenorIgual, null);
+                      else if (Match('-')) AddToken(TokenTypes.Declaracion, null);
+                      else AddToken(TokenTypes.Menor, null); break;
             case '=': if (Match('=')) AddToken(TokenTypes.Igual, null); break;
             case '&': if (Match('&')) AddToken(TokenTypes.And, null); break;
             case '|': if (Match('|')) AddToken(TokenTypes.Or, null); break;
@@ -48,6 +49,7 @@ class Scanner
             case ' ':
             case '\n': line++; break;
             case '"': String(); break;
+            case ',': AddToken(TokenTypes.Coma, null); break;
             default:
                 if (IsDigit(c)) Number();
                 else if (IsSpanishLetter(c)) Identificador();
@@ -78,9 +80,9 @@ class Scanner
         if (IsAtEnd()) return '\0';
         return source[current];
     }
-    public void AddToken(TokenTypes type, object? literal)
+    public void AddToken(TokenTypes type, object literal)
     {
-        string text = source.Substring(Start, current);
+        string text = source.Substring(Start, current-Start);
         tokens.Add(new Token(type, text, literal, line));
     }
     private void String()
@@ -107,7 +109,7 @@ class Scanner
     private void Number()
     {
         while (IsDigit(Peek())) Advance();
-        AddToken(TokenTypes.Numero, int.Parse(source.Substring(Start, current)));
+        AddToken(TokenTypes.Numero, int.Parse(source.Substring(Start, current-Start)));
     }
     private bool IsAlphaNumeric(char c)
     {
@@ -116,7 +118,7 @@ class Scanner
     private void Identificador()
     {
         while (IsAlphaNumeric(Peek())) Advance();
-        string text = source.Substring(Start, current);
+        string text = source.Substring(Start, current-Start);
         if (!KeyWords.TryGetValue(text, out TokenTypes type))
         {
             type = TokenTypes.Identificador;

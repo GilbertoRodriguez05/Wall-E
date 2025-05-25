@@ -1,0 +1,15 @@
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\bin\Debug\net8.0\Wall-E.exe
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\bin\Debug\net8.0\Wall-E.deps.json
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\bin\Debug\net8.0\Wall-E.runtimeconfig.json
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\bin\Debug\net8.0\Wall-E.dll
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\bin\Debug\net8.0\Wall-E.pdb
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.GeneratedMSBuildEditorConfig.editorconfig
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.AssemblyInfoInputs.cache
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.AssemblyInfo.cs
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.csproj.CoreCompileInputs.cache
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.sourcelink.json
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.dll
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\refint\Wall-E.dll
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.pdb
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\Wall-E.genruntimeconfig.cache
+D:\Universidad\Pro Gilbe\Segundo Proyecto\Wall-E\obj\Debug\net8.0\ref\Wall-E.dll

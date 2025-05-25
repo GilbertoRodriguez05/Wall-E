@@ -22,11 +22,15 @@ public class Token
 }
 public enum TokenTypes
 {
-    Suma, Resta, Multiplicacion, Division, Potencia, Modulo, Espacio,
+    Suma, Resta, Multiplicacion, Division, Potencia, Modulo, Espacio, Coma,
 
     Mayor, MayorIgual, Menor, MenorIgual, Igual, Declaracion, Distinto, Negacion, And, Or, AbreParentesis, CierraParentesis, AbreCorchete, CierraCorchete,
 
     Identificador, Cadena, Numero, Guion, Variable, Label, GoTo, EOF,
     Spawn, Color, Size, DrawLine, DrawCircle, DrawRectangle, Fill, GetActualX, GetActualY, GetCanvasSize, GetColorCount,
     IsBrushColor, IsBrushSize, IsCanvasColor, IsColor
+}
+public enum ExpresionsTypes
+{
+    Numero, Cadena, Bool, Error
 }

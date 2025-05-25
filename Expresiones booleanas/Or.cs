@@ -1,0 +1,35 @@
+
+class Or : BinaryExpresions
+{
+    public override object value { get; set; }
+    public Or(Expresions Right, Expresions Left)
+    {
+        this.Right = Right;
+        this.Left = Left;
+    }
+    public override void GetValue()
+    {
+        Right.GetValue();
+        Left.GetValue();
+        value = (bool)Right.value || (bool)Left.value;
+    }
+    public override bool SemanticCheck(List<Error> errors)
+    {
+        bool right = Right.SemanticCheck(errors);
+        bool left = Left.SemanticCheck(errors);
+        if (Right.Type() != ExpresionsTypes.Bool || Left.Type() != ExpresionsTypes.Bool)
+        {
+            errors.Add(new Error(TypeOfError.Expected, "Solo se puede aplicar a expresiones booleanas"));
+            return false;
+        }
+        return right && left;
+    }
+    public override ExpresionsTypes Type()
+    {
+        if (Right.Type() != ExpresionsTypes.Bool || Left.Type() != ExpresionsTypes.Bool)
+        {
+            return ExpresionsTypes.Error;
+        }
+        return ExpresionsTypes.Bool;
+    }
+}
