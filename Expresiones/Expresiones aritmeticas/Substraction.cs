@@ -13,10 +13,10 @@ class Substraction : BinaryExpresions
         Left.GetValue();
         value = Convert.ToInt32(Left) - Convert.ToInt32(Right);
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
-        bool right = Right.SemanticCheck(errors);
-        bool left = Left.SemanticCheck(errors);
+        bool right = Right.SemanticCheck(errors, entorno);
+        bool left = Left.SemanticCheck(errors, entorno);
         if (Right.Type() != ExpresionsTypes.Numero || Left.Type() != ExpresionsTypes.Numero)
         {
             errors.Add(new Error(TypeOfError.Expected, "La resta tiene que ser entre dos numeros"));

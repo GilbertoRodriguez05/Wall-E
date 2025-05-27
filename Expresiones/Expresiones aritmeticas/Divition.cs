@@ -13,10 +13,10 @@ class Divition : BinaryExpresions
         Left.GetValue();
         value = Convert.ToInt32(Right.value) / Convert.ToInt32(Left.value);
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
-        bool right = Right.SemanticCheck(errors);
-        bool left = Left.SemanticCheck(errors);
+        bool right = Right.SemanticCheck(errors, entorno);
+        bool left = Left.SemanticCheck(errors, entorno);
         if (Right.Type() != ExpresionsTypes.Numero || Left.Type() != ExpresionsTypes.Numero)
         {
             errors.Add(new Error(TypeOfError.Expected, "La division solo se puede hacer entre dos numeros"));

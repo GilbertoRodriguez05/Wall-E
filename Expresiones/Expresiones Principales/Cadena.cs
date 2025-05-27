@@ -13,7 +13,7 @@ class Cadena : Expresions
             SubCadena = Value.Substring(1, Value.Length - 2);
         }
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
         return true;
     }

@@ -1,8 +1,7 @@
-
-class Module : BinaryExpresions
+class GreaterOrEqual : BinaryExpresions
 {
     public override object value { get; set; }
-    public Module(Expresions Right, Expresions Left)
+    public GreaterOrEqual(Expresions Right, Expresions Left)
     {
         this.Right = Right;
         this.Left = Left;
@@ -11,15 +10,15 @@ class Module : BinaryExpresions
     {
         Right.GetValue();
         Left.GetValue();
-        value = Convert.ToInt32(Left.value) % Convert.ToInt32(Right.value);
+        value = Convert.ToInt32(Left.value) >= Convert.ToInt32(Right.value);
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
-        bool right = Right.SemanticCheck(errors);
-        bool left = Left.SemanticCheck(errors);
+        bool right = Right.SemanticCheck(errors, entorno);
+        bool left = Left.SemanticCheck(errors, entorno);
         if (Right.Type() != ExpresionsTypes.Numero || Left.Type() != ExpresionsTypes.Numero)
         {
-            errors.Add(new Error(TypeOfError.Expected, "La operacion modulo solo se pude hacer entre dos numeros"));
+            errors.Add(new Error(TypeOfError.Expected, "Solo se puede comparar entre dos numeros"));
             return false;
         }
         return right && left;
@@ -30,6 +29,6 @@ class Module : BinaryExpresions
         {
             return ExpresionsTypes.Error;
         }
-        return ExpresionsTypes.Numero;
+        return ExpresionsTypes.Bool;
     }
 }

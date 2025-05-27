@@ -1,7 +1,10 @@
-class GreaterThan : BinaryExpresions
+
+using Microsoft.VisualBasic;
+
+class Pow : BinaryExpresions
 {
     public override object value { get; set; }
-    public GreaterThan(Expresions Right, Expresions Left)
+    public Pow(Expresions Right, Expresions Left)
     {
         this.Right = Right;
         this.Left = Left;
@@ -10,15 +13,15 @@ class GreaterThan : BinaryExpresions
     {
         Right.GetValue();
         Left.GetValue();
-        value = Convert.ToInt32(Left.value) > Convert.ToInt32(Right.value);
+        value = Math.Pow(Convert.ToInt32(Left.value), Convert.ToInt32(Right.value));
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
-        bool right = Right.SemanticCheck(errors);
-        bool left = Left.SemanticCheck(errors);
+        bool right = Right.SemanticCheck(errors, entorno);
+        bool left = Left.SemanticCheck(errors, entorno);
         if (Right.Type() != ExpresionsTypes.Numero || Left.Type() != ExpresionsTypes.Numero)
         {
-            errors.Add(new Error(TypeOfError.Expected, "Solo se puede comparar entre dos numeros"));
+            errors.Add(new Error(TypeOfError.Expected, "La potencia solo se pueda hacer entre dos numeros"));
             return false;
         }
         return right && left;
@@ -29,6 +32,6 @@ class GreaterThan : BinaryExpresions
         {
             return ExpresionsTypes.Error;
         }
-        return ExpresionsTypes.Bool;
+        return ExpresionsTypes.Numero;
     }
 }

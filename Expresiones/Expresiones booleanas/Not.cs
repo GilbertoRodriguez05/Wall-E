@@ -10,7 +10,7 @@ class Not : Expresions
     {
        
     }
-    public override bool SemanticCheck(List<Error> errors)
+    public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
         return true;
     }
