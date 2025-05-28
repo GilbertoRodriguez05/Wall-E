@@ -7,9 +7,9 @@ class Variable : Expresions
     {
         this.var = var;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        value = entorno.GetValue(var);
+        value = entorno.Execute(var);
     }
     public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {

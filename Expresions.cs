@@ -1,9 +1,6 @@
-public abstract class Expresions
+public abstract class Expresions : AST
 {
     public abstract object value { get; set; }
-
-    public abstract void GetValue();
-    public abstract bool SemanticCheck(List<Error> errors, Entorno entorno);
     public abstract ExpresionsTypes Type();
 }
 

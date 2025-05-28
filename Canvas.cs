@@ -8,7 +8,7 @@ public class Canvas
     public Colors[,] Board;
     public int ActualX { get; set; }
     public int ActualY { get; set; }
-    public int BrushSize { get; set; }
+    public int BrushSize = 1;
     public Colors BrushColor { get; set; }
     public Canvas(int ActualX, int ActualY)
     {

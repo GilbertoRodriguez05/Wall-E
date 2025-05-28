@@ -6,7 +6,7 @@ class Booleano : Expresions
     {
         this.value = value;
     }
-    public override void GetValue()
+    public override void Execute()
     {
 
     }

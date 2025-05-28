@@ -7,10 +7,10 @@ class Substraction : BinaryExpresions
         this.Right = Right;
         this.Left = Left;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        Right.GetValue();
-        Left.GetValue();
+        Right.Execute();
+        Left.Execute();
         value = Convert.ToInt32(Left) - Convert.ToInt32(Right);
     }
     public override bool SemanticCheck(List<Error> errors, Entorno entorno)

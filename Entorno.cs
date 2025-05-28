@@ -6,7 +6,7 @@ public class Entorno
     {
 
     }
-    public object GetValue(string name)
+    public object Execute(string name)
     {
         if (Value.ContainsKey(name)) return Value[name];
         else return null;

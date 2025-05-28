@@ -6,7 +6,7 @@ class Numero : Expresions
     {
         this.value = value;
     }
-    public override void GetValue()
+    public override void Execute()
     {
 
     }

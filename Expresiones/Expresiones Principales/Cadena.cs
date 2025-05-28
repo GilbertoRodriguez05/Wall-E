@@ -6,7 +6,7 @@ class Cadena : Expresions
     {
         this.value = value;
     }
-    public override void GetValue()
+    public override void Execute()
     {
         if (value is string Value)
         {

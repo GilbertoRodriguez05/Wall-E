@@ -1,7 +1,7 @@
 
 using System.Security.Cryptography.X509Certificates;
 
-class Spawn : Declarations
+class Spawn : AST
 {
     public Expresions initialX;
     public Expresions initialY;
@@ -15,8 +15,8 @@ class Spawn : Declarations
     public override void Execute()
     {
         canvas.InicializarCanvas();
-        initialX.GetValue();
-        initialY.GetValue();
+        initialX.Execute();
+        initialY.Execute();
         canvas.ActualX = Convert.ToInt32(initialX.value);
         canvas.ActualY = Convert.ToInt32(initialY.value);
     }
@@ -40,5 +40,6 @@ class Spawn : Declarations
             return false;
         }
         return x && y;
+        
     }
 }

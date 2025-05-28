@@ -6,6 +6,7 @@ n <- k * 2
 actual-x <- GetActualX()
 i <- 0
 
+"aaa"
 loop-1
 DrawLine(1, 0, 1)
 i <- i + 1

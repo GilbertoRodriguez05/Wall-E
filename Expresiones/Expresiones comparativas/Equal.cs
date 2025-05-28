@@ -6,10 +6,10 @@ class Equal: BinaryExpresions
         this.Right = Right;
         this.Left = Left;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        Right.GetValue();
-        Left.GetValue();
+        Right.Execute();
+        Left.Execute();
         if (Right.Type() == ExpresionsTypes.Numero && Left.Type() == ExpresionsTypes.Numero)
         {
             value = Convert.ToInt32(Left.value) == Convert.ToInt32(Right.value);

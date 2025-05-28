@@ -6,10 +6,10 @@ public class Addition : BinaryExpresions
         this.Left = Left;
         this.Right = Right;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        Left.GetValue();
-        Right.GetValue();
+        Left.Execute();
+        Right.Execute();
         value = Convert.ToInt32(Left.value) + Convert.ToInt32(Right.value);
     }
     public override ExpresionsTypes Type()

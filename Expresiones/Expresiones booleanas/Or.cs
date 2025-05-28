@@ -7,10 +7,10 @@ class Or : BinaryExpresions
         this.Right = Right;
         this.Left = Left;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        Right.GetValue();
-        Left.GetValue();
+        Right.Execute();
+        Left.Execute();
         value = (bool)Right.value || (bool)Left.value;
     }
     public override bool SemanticCheck(List<Error> errors, Entorno entorno)

@@ -44,9 +44,9 @@ public class Scanner
             case '=': if (Match('=')) AddToken(TokenTypes.Igual, null); break;
             case '&': if (Match('&')) AddToken(TokenTypes.And, null); break;
             case '|': if (Match('|')) AddToken(TokenTypes.Or, null); break;
-            case '\t':
-            case '\r':
-            case ' ':
+            case '\t': break;
+            case '\r': break;
+            case ' ': break;
             case '\n': line++; break;
             case '"': String(); break;
             case ',': AddToken(TokenTypes.Coma, null); break;
@@ -113,13 +113,13 @@ public class Scanner
     }
     private bool IsAlphaNumeric(char c)
     {
-        return IsSpanishLetter(c) || IsDigit(c) || c == '-';
+        return IsSpanishLetter(c) || IsDigit(c) || c == '_';
     }
     private void Identificador()
     {
         while (IsAlphaNumeric(Peek())) Advance();
         string text = source.Substring(Start, current-Start);
-        if (!KeyWords.TryGetValue(text, out TokenTypes type))
+        if (!KeyWords.TryExecute(text, out TokenTypes type))
         {
             type = TokenTypes.Identificador;
         }

@@ -1,5 +1,5 @@
 
-class Color : Declarations
+class Color : AST
 {
     public List<string> DiferentsColor = new List<string> {"blue", "red", "green", "yellow", "black", "white", "orange", "purple", "transparent"};
     public Expresions color;
@@ -7,12 +7,13 @@ class Color : Declarations
     public Color(Expresions color, Canvas canvas)
     {
         this.color = color;
+        this.canvas = canvas;
     }
     public override void Execute()
     {
-        color.GetValue();
+        color.Execute();
         string colorValue = (string)color.value;
-        switch (colorValue)
+        switch (colorValue.ToLower())
         {
             case "red": canvas.BrushColor = Colors.Red; break;
             case "blue": canvas.BrushColor = Colors.Blue; break;
@@ -28,7 +29,7 @@ class Color : Declarations
     }
     public override bool SemanticCheck(List<Error> errors, Entorno entorno)
     {
-        color.GetValue();
+        color.Execute();
         string colorValue = (string)color.value;
         if (color.Type() != ExpresionsTypes.Cadena)
         {

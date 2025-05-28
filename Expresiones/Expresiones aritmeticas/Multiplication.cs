@@ -7,10 +7,10 @@ class Multiplication : BinaryExpresions
         this.Left = Left;
         this.Right = Right;
     }
-    public override void GetValue()
+    public override void Execute()
     {
-        Right.GetValue();
-        Left.GetValue();
+        Right.Execute();
+        Left.Execute();
         value = Convert.ToInt32(Right.value) * Convert.ToInt32(Left.value);
     }
     public override bool SemanticCheck(List<Error> errors, Entorno entorno)
