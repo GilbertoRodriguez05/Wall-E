@@ -119,7 +119,7 @@ public class Scanner
     {
         while (IsAlphaNumeric(Peek())) Advance();
         string text = source.Substring(Start, current-Start);
-        if (!KeyWords.TryExecute(text, out TokenTypes type))
+        if (!KeyWords.TryGetValue(text, out TokenTypes type))
         {
             type = TokenTypes.Identificador;
         }

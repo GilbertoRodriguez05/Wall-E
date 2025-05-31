@@ -2,6 +2,7 @@ public class Entorno
 {
     public Dictionary<string, object> Value = new Dictionary<string, object>();
     private Dictionary<string, ExpresionsTypes> Type = new Dictionary<string, ExpresionsTypes>();
+    public List<string> labels = new List<string>();
     public Entorno()
     {
 
@@ -26,5 +27,13 @@ public class Entorno
         if (Type.ContainsKey(name)) Type[name] = type;
         else Type.Add(name, type);
     }
-
+    public bool SetLabel(string label)
+    {
+        if (!labels.Contains(label))
+        {
+            labels.Add(label);
+            return false;
+        }
+        else return true;
+    }
 }
