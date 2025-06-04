@@ -144,6 +144,15 @@ public class Scanner
         {"IsBrushColor", TokenTypes.IsBrushColor},
         {"IsBrushSize", TokenTypes.IsBrushSize},
         {"IsCanvasColor", TokenTypes.IsCanvasColor},
-        {"IsColor", TokenTypes.IsColor}
+        {"IsColor", TokenTypes.IsColor},
+        {"Black", TokenTypes.Cadena},
+        {"White", TokenTypes.Cadena},
+        {"Red", TokenTypes.Cadena},
+        {"Blue", TokenTypes.Cadena},
+        {"Yellow", TokenTypes.Cadena},
+        {"Green", TokenTypes.Cadena},
+        {"Orange", TokenTypes.Cadena},
+        {"Purple", TokenTypes.Cadena},
+        {"Transparent", TokenTypes.Cadena}
     };
 }

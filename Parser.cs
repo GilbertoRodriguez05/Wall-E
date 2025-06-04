@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Formats.Asn1;
 
 class Parser
 {
@@ -20,10 +21,16 @@ class Parser
 
     public AST Main()
     {
-        if (!Match(TokenTypes.Spawn) && !Match(TokenTypes.AbreParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba spawn", Previous().line));
+
+        if (Match(TokenTypes.Spawn))
+        {
+            if(!Match(TokenTypes.AbreParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba (", Previous().line));
+        }    
+        else errors.Add(new Error(TypeOfError.Expected, "Se esperaba spawn", Previous().line));
 
         Numero x = null;
         Numero y = null;
+
         if (Match(TokenTypes.Numero)) x = new Numero(Convert.ToInt32(Previous().literal));
         else errors.Add(new Error(TypeOfError.Expected, "Se esperaba un numero", Previous().line));
 
@@ -150,25 +157,19 @@ class Parser
         }
         else if (Match(TokenTypes.Identificador))
         {
-            if (Match(TokenTypes.Declaracion))
-            {
-                Token variable = Previous();
-                Expresions expresion = new Variable(variable.lexeme);
-
-                return expresion;
-            }
-            else
-            {
-                errors.Add(new Error(TypeOfError.Invalid, "Expresion invalida", Previous().line));
-                throw new Exception("Expresion invalida " +  Previous().line);
-            }
+            Token variable = Previous();
+            Expresions expr = new Variable(variable.lexeme);
+            return expr;
         }
         else
         {
+            
             errors.Add(new Error(TypeOfError.Invalid, "Expresion invalida", Previous().line));
             throw new Exception("Expresion invalida " +  Previous().line);
         }
     }
+
+
     public bool Match(params TokenTypes[] types)
     {
         foreach (TokenTypes item in types)
@@ -222,6 +223,14 @@ class Parser
     public AST VarDeclaration(Expresions expresions)
     {
         Token operador = Previous();
+        if (Match(TokenTypes.Fill)) return Fill();
+        else if (Match(TokenTypes.GetActualX)) return GetActualX();
+        else if (Match(TokenTypes.GetActualY)) return GetActualY();
+        else if (Match(TokenTypes.GetCanvasSize)) return GetCanvasSize();
+        else if (Match(TokenTypes.GetColorCount)) return GetColorCount();
+        else if (Match(TokenTypes.IsBrushColor)) return IsBrushColor();
+        else if (Match(TokenTypes.IsBrushSize)) return IsBrushSize();
+        else if (Match(TokenTypes.IsCanvasColor)) return IsCanvasColor();
         Expresions initializer = Expresions();
         return new VarDeclaration(expresions, initializer, operador, entorno);
     }
@@ -235,11 +244,12 @@ class Parser
             if (Match(TokenTypes.Declaracion))
             {
                 ast = VarDeclaration(expresions);
-            }
+            }        
         }
         else throw new Error(TypeOfError.Invalid, "Expresion invalida" , Previous().line);
         return ast;
     }
+
 
     public AST Color()
     {
@@ -451,7 +461,8 @@ class Parser
     }
     public AST Label()
     {
-       return new Label(Previous().lexeme, Block(), entorno);
+        Move();
+        return new Label(Previous().lexeme, Block(), entorno);
     }
     public AST GoTo()
     {
@@ -475,8 +486,10 @@ class Parser
         List<AST> Declarations = [spawn];
         do
         {
+            if (!(Actual().types is TokenTypes.EOF)) break;
             try
             {
+                if (!(Actual().types is TokenTypes.EOF)) System.Console.WriteLine(Convert.ToString(Actual().types) + " " + Actual().line + " " + Actual().lexeme);
                 if (Match(TokenTypes.GetActualX)) Declarations.Add(new GetActualX(canvas));
                 else if (Match(TokenTypes.GetActualY)) Declarations.Add(new GetActualY(canvas));
                 else if (Match(TokenTypes.Color)) Declarations.Add(Color());
@@ -493,9 +506,9 @@ class Parser
                 else if (Match(TokenTypes.IsBrushSize)) Declarations.Add(IsBrushSize());
                 else if (Match(TokenTypes.IsCanvasColor)) Declarations.Add(IsCanvasColor());
                 else if (Match(TokenTypes.GoTo)) Declarations.Add(GoTo());
-                else if (Match(TokenTypes.Identificador))
+                else if (Check(TokenTypes.Identificador))
                 {
-                    if (Check(TokenTypes.Declaracion))
+                    if (Next(TokenTypes.Declaracion))
                     {
                         Declarations.Add(Declaration());
                     }
@@ -508,9 +521,9 @@ class Parser
             }
             catch (Error)
             {
-                throw new Error (TypeOfError.Invalid, "Error en la declaracion", Previous().line);
+                throw new Error(TypeOfError.Invalid, "Error en la declaracion", Previous().line);
             }
-        } while (!Match(TokenTypes.EOF));
+        } while (!(Actual().types is TokenTypes.EOF));
 
         return new Block(Declarations);
     }

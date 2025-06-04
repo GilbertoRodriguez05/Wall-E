@@ -8,8 +8,12 @@
         Scanner escaner = new Scanner(codigoFuente);
         List<Error> errors = new List<Error>();
         List<Token> tokens = escaner.ScanTokens();
-        Parser parser = new Parser (tokens, errors, entorno, canvas);
+        Parser parser = new Parser(tokens, errors, entorno, canvas);
         parser.Main();
+        // foreach (Token item in tokens)
+        // {
+        //     System.Console.WriteLine(Convert.ToString(item.types) + " " + Convert.ToString(item.lexeme));
+        // }
        
     }
 }
