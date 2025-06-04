@@ -41,7 +41,7 @@ public class Scanner
             case '<': if (Match('=')) AddToken(TokenTypes.MenorIgual, null);
                       else if (Match('-')) AddToken(TokenTypes.Declaracion, null);
                       else AddToken(TokenTypes.Menor, null); break;
-            case '=': if (Match('=')) AddToken(TokenTypes.Igual, null); break;
+            case '=': AddToken(Match('=') ? TokenTypes.Igual : TokenTypes.Equal, null); break;
             case '&': if (Match('&')) AddToken(TokenTypes.And, null); break;
             case '|': if (Match('|')) AddToken(TokenTypes.Or, null); break;
             case '\t': break;
@@ -127,7 +127,10 @@ public class Scanner
     }
     public static Dictionary<string, TokenTypes> KeyWords = new Dictionary<string, TokenTypes>
     {
-        {"Spawn", TokenTypes.Spawn},
+        {"True", TokenTypes.True},
+        {"False", TokenTypes.False},
+        { "GoTo", TokenTypes.GoTo},
+        { "Spawn", TokenTypes.Spawn},
         {"Color", TokenTypes.Color},
         {"Size", TokenTypes.Size},
         {"DrawLine", TokenTypes.DrawLine},

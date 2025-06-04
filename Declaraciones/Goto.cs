@@ -1,8 +1,8 @@
-class Goto : AST
+public class GoTo : AST
 {
     Label Label;
     Expresions Condition;
-    public Goto(Label Label, Expresions Condition)
+    public GoTo(Label Label, Expresions Condition)
     {
         this.Label = Label;
         this.Condition = Condition;
@@ -22,7 +22,7 @@ class Goto : AST
             errors.Add(new Error(TypeOfError.Expected, "Se esperaba un tipo bool"));
             return false;
         }
-        else if (entorno.SetLabel(Label.name))
+        else if (!entorno.GetLabel(Label.name))
         {
             errors.Add(new Error(TypeOfError.VariableUndefined, "Label no definida"));
             return false;

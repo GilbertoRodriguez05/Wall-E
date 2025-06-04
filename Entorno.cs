@@ -27,13 +27,13 @@ public class Entorno
         if (Type.ContainsKey(name)) Type[name] = type;
         else Type.Add(name, type);
     }
-    public bool SetLabel(string label)
+    public void SetLabel(string label)
     {
-        if (!labels.Contains(label))
-        {
-            labels.Add(label);
-            return false;
-        }
-        else return true;
+        labels.Add(label);
+    }
+    public bool GetLabel(string label)
+    {
+        if (labels.Contains(label)) return true;
+        else return false;
     }
 }
