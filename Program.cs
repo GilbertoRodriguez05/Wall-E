@@ -9,11 +9,16 @@
         List<Error> errors = new List<Error>();
         List<Token> tokens = escaner.ScanTokens();
         Parser parser = new Parser(tokens, errors, entorno, canvas);
-        parser.Main();
+        AST block = parser.Main();
+        block.SemanticCheck(errors, entorno);
+        foreach (Error item in errors)
+        {
+            System.Console.WriteLine(item.ToString());
+        }
         // foreach (Token item in tokens)
         // {
         //     System.Console.WriteLine(Convert.ToString(item.types) + " " + Convert.ToString(item.lexeme));
         // }
-       
+
     }
 }

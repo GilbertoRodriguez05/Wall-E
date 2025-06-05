@@ -13,7 +13,7 @@ public class Error : Exception
     }
     public override string ToString()
     {
-        return argument + " Error de tipo " + typeOfError + "en la linea " + line;
+        return argument + " Error de tipo " + typeOfError + " en la linea " + line;
     }
 
 }

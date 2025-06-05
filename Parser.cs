@@ -21,30 +21,26 @@ class Parser
 
     public AST Main()
     {
-
-        if (Match(TokenTypes.Spawn))
-        {
-            if(!Match(TokenTypes.AbreParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba (", Previous().line));
-        }    
-        else errors.Add(new Error(TypeOfError.Expected, "Se esperaba spawn", Previous().line));
-
         Numero x = null;
         Numero y = null;
+        if (Match(TokenTypes.Spawn))
+        {
+            if (!Match(TokenTypes.AbreParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba (", 1));
+           
+            if (Match(TokenTypes.Numero)) x = new Numero(Convert.ToInt32(Previous().literal));
+            else errors.Add(new Error(TypeOfError.Expected, "Se esperaba un numero", 1));
 
-        if (Match(TokenTypes.Numero)) x = new Numero(Convert.ToInt32(Previous().literal));
-        else errors.Add(new Error(TypeOfError.Expected, "Se esperaba un numero", Previous().line));
+            if (!Match(TokenTypes.Coma)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba una coma"));
 
-        if (!Match(TokenTypes.Coma)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba una coma"));
+            if (Match(TokenTypes.Numero)) y = new Numero(Convert.ToInt32(Previous().literal));
+            else errors.Add(new Error(TypeOfError.Expected, "Se esperaba un numero", 1));
 
-        if (Match(TokenTypes.Numero)) y = new Numero(Convert.ToInt32(Previous().literal));
-        else errors.Add(new Error(TypeOfError.Expected, "Se esperaba un numero", Previous().line));
-
-        if (!Match(TokenTypes.CierraParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba un parentesis cerrado", Previous().line));
-
+            if (!Match(TokenTypes.CierraParentesis)) errors.Add(new Error(TypeOfError.Expected, "Se esperaba un parentesis cerrado", 1));
+        }
+        else errors.Add(new Error(TypeOfError.Expected, "Se esperaba Spawn", 1));
 
         spawn = new Spawn(x, y, canvas);
         return Block();
-
 
     }
     public Expresions Expresions()
@@ -248,6 +244,16 @@ class Parser
         }
         else throw new Error(TypeOfError.Invalid, "Expresion invalida" , Previous().line);
         return ast;
+    }
+    public bool sincronizar(Error error, TokenTypes final = TokenTypes.EOF) //Recupera el análisis después de un error
+    {
+        errors.Add( error);
+        while (!Match(final))
+        {
+            if (Actual().types == TokenTypes.EOF || Actual().types == TokenTypes.CierraParentesis) return true;
+            else Move();
+        }
+        return false;
     }
 
 
@@ -519,14 +525,12 @@ class Parser
                 }
                 else Declarations.Add(Declaration());
             }
-            catch (Error)
+            catch (Error error)
             {
-                throw new Error(TypeOfError.Invalid, "Error en la declaracion", Previous().line);
+                if (sincronizar(error, TokenTypes.EOF)) break;
             }
         } while (!(Actual().types is TokenTypes.EOF));
 
         return new Block(Declarations);
     }
-    
-    
 }
